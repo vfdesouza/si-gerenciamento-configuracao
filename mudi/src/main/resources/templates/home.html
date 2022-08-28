@@ -1,0 +1,63 @@
+<!doctype html>
+<html xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en">
+
+<head th:replace="~{layout :: head}"></head>
+
+<body>
+    <div th:replace="~{layout :: logo}"></div>
+    <div class="container">
+        <div class="md-6 p-5 mb-1 bg-secondary rounded-3">
+            <h1 class="display-4">Title</h1>
+        </div>
+
+        <nav class="navbar navbar-expand bg-light bg-light d-flex justify-content-between mb-3 rounded-2">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="/home">All</a>
+                <a th:classappend="${statusRequest} == 'waiting' ? 'active'" class="nav-item nav-link" href="/home/waiting">Waiting</a>
+                <a th:classappend="${statusRequest} == 'approved' ? 'active'" class="nav-item nav-link" href="/home/approved">Approved</a>
+                <a th:classappend="${statusRequest} == 'delivered' ? 'active'" class="nav-item nav-link" href="/home/delivered">Delivered</a>
+            </div>
+            <a href="/formCad"><button class="btn btn-success my-2 my-sm-0">New</button></a>
+        </nav>
+
+        <form th:action="@{/home}" method="get">
+            <div class="input-group mb-3">
+                <input name="productName" class="form-control" type="text" placeholder="Product search...">
+                <button class="btn btn-primary" type="submit" id="button-addon1">Search</button>
+            </div>
+        </form>
+        
+        <div class="card mb-2" th:each="request : ${requests}">
+            <th:block th:switch="${request.statusRequest.name()}">
+                <div th:case="'WAITING'" class="card-header alert alert-warning" th:text="${request.productName}">Product Name</div>
+                <div th:case="'APPROVED'" class="card-header alert alert-success" th:text="${request.productName}">Product Name</div>
+                <div th:case="'DELIVERED'" class="card-header alert alert-dark" th:text="${request.productName}">Product Name</div>
+            </th:block>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-sm-8 mb-3">
+                        <div class="row">
+                            <div class="col-md-5">Price: <span th:text="${'R$ ' + #numbers.formatDecimal(request.negotiatedValue,3,'POINT',2,'COMMA')}"></span></div>
+                            <div class="col-md-7">Delivery date: <span th:text="${request.deliveryDate}"></span></div>
+                        </div>
+
+                        <div>Product:</div>
+                        <div><input class="form-control" th:value="${request.productUrl}" value="url do produto"></div>
+
+                        <div>Description:</div>
+                        <div>
+                            <textarea class="form-control" th:text="${request.description}"
+                                placeholder="Descrição do produto..."></textarea>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-4 ">
+                        <div>
+                            <img th:src="${request.imageUrl}" class="img-thumbnail">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
