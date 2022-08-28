@@ -1,0 +1,57 @@
+<!doctype html>
+<html xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en">
+
+<head th:replace="~{layout :: head}"></head>
+
+<body>
+    <div th:replace="~{layout :: logo}"></div>
+    <div class="container col-md-7">
+        <div class="card mb-3">
+            <div class="md-6 p-5 mb-1 bg-secondary rounded-3">
+                <h1 class="display-4">Title</h1>
+            </div>
+            <form th:object="${request}" class="container" action="/formCad" method="POST">
+                <div class="mb-3">
+                    <label class="form-label">Product Name:</label>
+                    <input th:field="*{productName}" th:errorclass="is-invalid" class="form-control"
+                        placeholder="Sony Playstation 5">
+                    <div class="invalid-feedback" th:errors="*{productName}"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Value Negotiated:</label>
+                    <input th:field="*{negotiatedValue}" class="form-control" placeholder="R$ 0,00">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Delivery Date:</label>
+                    <input type="text" th:field="*{deliveryDate}" th:errorclass="is-invalid" class="form-control"
+                        laceholder="01/01/2022">
+                    <div class="invalid-feedback" th:errors="*{deliveryDate}"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Product URL:</label>
+                    <input th:field="*{productUrl}" type="url" th:errorclass="is-invalid" class="form-control"
+                        placeholder="loja@product.com.br">
+                    <div class="invalid-feedback" th:errors="*{productUrl}"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Image URL:</label>
+                    <input th:field="*{imageUrl}" type="url" th:errorclass="is-invalid" class="form-control"
+                        placeholder="Exemple: .jpeg">
+                    <div class="invalid-feedback" th:errors="*{imageUrl}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <input th:field="*{description}" class="form-control" placeholder="Sony Playstation 5 1TB">
+                    </div>
+                        <button class="btn btn-success my-2 my-sm-0" type="submit">Insert</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
