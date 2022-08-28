@@ -1,0 +1,27 @@
+<!doctype html>
+<html xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en">
+
+<head th:replace="~{layout :: head}"></head>
+
+<body>
+<div th:replace="~{layout :: logo}"></div>
+<div class="container col-md-5">
+    <div class="card mb-3">
+        <div class="md-6 p-5 mb-1 bg-secondary rounded-3">
+            <h1 class="display-4">Login</h1>
+        </div>
+        <form class="container" th:action="@{/login}" method="POST">
+            <div class="mb-3">
+                <label class="form-label">Username:</label>
+                <input name="username" class="form-control" placeholder="Username">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password:</label>
+                <input type="password" name="password" class="form-control" placeholder="Password">
+            </div>
+            <button class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
