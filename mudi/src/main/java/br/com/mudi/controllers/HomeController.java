@@ -1,8 +1,11 @@
 package br.com.mudi.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/home")
@@ -21,4 +24,13 @@ public class HomeController {
         mv.addObject("requests", rr.findByProductNameIgnoreCaseContaining(productName));
         return mv;
     }
+
+    @GetMapping("/{statusRequest}")
+    public String status(@PathVariable("statusRequest") String statusRequest, Model model) {
+        List<Request> requests = rr.findByStatusRequest(StatusRequest.valueOf(statusRequest.toUpperCase()));
+        model.addAttribute("requests", requests);
+        model.addAttribute("statusRequest", statusRequest);
+        return "home";
+    }
+
 }
