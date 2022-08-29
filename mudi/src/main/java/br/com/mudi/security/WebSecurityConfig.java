@@ -25,3 +25,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll());
     }
 }
+    @Override
+    public UserDetailsService userDetailsService() {
+        UserDetails user =
+                User.withDefaultPasswordEncoder()
+                        .username("root")
+                        .password("root")
+                        .roles("ADM")
+                        .build();
+        return new InMemoryUserDetailsManager(user);
+    }
