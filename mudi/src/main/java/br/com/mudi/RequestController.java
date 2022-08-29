@@ -20,5 +20,16 @@ public class RequestController {
     public String form(Request request) {
         return "formCad";
     }
+    @PostMapping
+    public String insert(@Valid Request request, BindingResult result){
+        if(result.hasErrors()) {
+            return "formCad";
+        }
+        request.setStatusRequest(StatusRequest.valueOf("WAITING"));
+        rr.save(request);
+        return "redirect:/home"
+        
+     ;
+    }
 
 }
