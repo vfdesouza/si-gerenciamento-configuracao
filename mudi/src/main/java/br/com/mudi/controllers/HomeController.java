@@ -1,4 +1,7 @@
 package br.com.mudi.controllers;
+import br.com.mudi.models.Request;
+import br.com.mudi.models.StatusRequest;
+import br.com.mudi.repository.RequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,5 +35,8 @@ public class HomeController {
         model.addAttribute("statusRequest", statusRequest);
         return "home";
     }
-
+    @ExceptionHandler(IllegalArgumentException.class)
+    public String onError() {
+        return "redirect:/home";
+    }
 }
