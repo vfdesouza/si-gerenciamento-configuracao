@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Configuration
 @EnableWebSecurity
@@ -19,12 +20,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity
                 .authorizeHttpRequests()
                 .anyRequest().authenticated()
-            .and()
-            .formLogin(form -> form
-                    .loginPage("/login")
-                    .permitAll());
+                .and()
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .permitAll());
     }
-}
+
     @Bean
     @Override
     public UserDetailsService userDetailsService() {
@@ -36,3 +37,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .build();
         return new InMemoryUserDetailsManager(user);
     }
+}
