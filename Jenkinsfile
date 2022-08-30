@@ -1,7 +1,7 @@
 pipeline {
     agent any
 tools {
-        JDK 'zulu17.34.19-ca-jdk17.0.3'
+        JDK "JDK"
     }
     stages {
         stage('Initialize'){
