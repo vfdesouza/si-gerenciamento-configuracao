@@ -1,8 +1,8 @@
 pipeline {
     agent any
 tools {
-        maven 'apache-maven-3.8.5'
-        jdk 'zulu17.34.19-ca-jdk17.0.3'
+        MAVEN 'apache-maven-3.8.5'
+        JDK 'zulu17.34.19-ca-jdk17.0.3'
     }
     stages {
         stage('Initialize'){
