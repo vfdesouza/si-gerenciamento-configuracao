@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                dir("D:\Faculdade\4° período\Gerenciamento de Configuração\Projeto\si-gerenciamento-configuracao\mudi") {
+                dir("D:\Faculdade\4° período\Gerenciamento de Configuração\Projeto") {
                 bat 'mvn -B -DskipTests clean package'
                 }
             }
