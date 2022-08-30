@@ -1,16 +1,30 @@
 pipeline {
     agent any
-    
+    tools {
+        maven "maven_3_8_5"
+        jdk "jdk"
+    }
     stages {
+        stage('Initialize'){
+            steps{
+                echo "PATH = ${M2_HOME}/bin:${PATH}"
+                echo "M2_HOME = /opt/maven"
+            }
+        }
         stage('Build') {
             steps {
-                bat 'mvn clean install'
+                dir("D:\Faculdade\4° período\Gerenciamento de Configuração\Projeto\si-gerenciamento-configuracao\mudi") {
+                bat 'mvn -B -DskipTests clean package'
+                }
             }
         }
-        stage('Test') {
-            steps {
-                bat 'mvn test'
-            }
-        }
-    }   
+     }
+    post {
+       always {
+          junit(
+        allowEmptyResults: true,
+        testResults: '*/test-reports/.xml'
+      )
+      }
+   } 
 }
